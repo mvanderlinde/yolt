@@ -6,11 +6,9 @@ class Yolt < Formula
   homepage "https://github.com/mvanderlinde/yolt"
   license any_of: ["MIT", "Apache-2.0"]
 
-  # Stable install: after tagging yolt (e.g. v0.1.0), uncomment and fill url/sha256/version.
-  #   curl -sL https://github.com/mvanderlinde/yolt/archive/refs/tags/v0.1.0.tar.gz | shasum -a 256
-  # url "https://github.com/mvanderlinde/yolt/archive/refs/tags/v0.1.0.tar.gz"
-  # sha256 "..."
-  # version "0.1.0"
+  url "https://github.com/mvanderlinde/yolt/archive/refs/tags/v0.1.0.tar.gz"
+  sha256 "f4fb1c70e3d6063733f2f66368e056ccca61500a8615be9de77c098b06572da1"
+  version "0.1.0"
 
   head "https://github.com/mvanderlinde/yolt.git", branch: "main"
 
