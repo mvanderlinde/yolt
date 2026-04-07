@@ -1,0 +1,25 @@
+[package]
+name = "yolt"
+version = "0.1.0"
+edition = "2021"
+description = "Undo destructive LLM actions — Yolt (You Only Live Twice) — backs up files before they change for quick reverts. A safer way to yolo."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/mvanderlinde/yolt"
+rust-version = "1.83"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+clap = { version = "4", features = ["derive", "env", "string"] }
+humantime = "2"
+ignore = "0.4"
+notify = "5"
+serde = { version = "1", features = ["derive"] }
+sha2 = "0.10"
+fs2 = "0.4"
+thiserror = "1"
+toml = "0.8"
+walkdir = "2"
+
+[dev-dependencies]
+tempfile = "3"
