@@ -1,6 +1,13 @@
 # yolt
 
-Yolt (*You Only Live Twice*) is a small macOS CLI that watches a project directory for filesystem events and copies files into a backup tree **just before** they change, so you can roll back quickly when an editor or LLM does something you regret. It's a safer way to run LLMs in yolo mode.
+Yolt *(You Only Live Twice)* is a lightweight CLI that makes it safer to run LLMs with filesystem access by keeping restorable snapshots of your files. It was built after an LLM running locally overwrote a SQLite DB file with no recovery path.
+
+It protects against the most painful failure modes:
+
+- Overwritten files
+- Deleted files
+
+Yolt doesn't try to undo everything, it just makes sure you have a recoverable version when things go wrong.
 
 Backup retention limits *(30m default)* and optional disk space limits are used to control disk usage.
 
