@@ -6,9 +6,9 @@ class Yolt < Formula
   homepage "https://github.com/mvanderlinde/yolt"
   license any_of: ["MIT", "Apache-2.0"]
 
-  url "https://github.com/mvanderlinde/yolt/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "f4fb1c70e3d6063733f2f66368e056ccca61500a8615be9de77c098b06572da1"
-  version "0.1.0"
+  url "https://github.com/mvanderlinde/yolt/archive/refs/tags/v0.2.0.tar.gz"
+  sha256 "3146b3b80ba972cb256d7b967bfa4cf025fb9a331ded55b45d9debd89c7ee9a7"
+  version "0.2.0"
 
   head "https://github.com/mvanderlinde/yolt.git", branch: "main"
 
