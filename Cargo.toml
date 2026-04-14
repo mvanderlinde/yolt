@@ -1,6 +1,6 @@
 [package]
 name = "yolt"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "Undo destructive LLM actions — Yolt (You Only Live Twice) — backs up files before they change for quick reverts. A safer way to yolo."
 license = "MIT OR Apache-2.0"
