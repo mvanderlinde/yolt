@@ -1,12 +1,13 @@
-//! spec/retention.md — disk cap deletes oldest runs first.
+//! spec/retention.md — time-based pruning (no base snapshot marker).
 
 use std::fs;
 use std::time::Duration;
 
+use filetime::{set_file_mtime, FileTime};
 use tempfile::tempdir;
 
 #[test]
-fn prune_disk_cap_removes_oldest_first() {
+fn prune_time_deletes_expired_without_base_marker() {
     let root = tempdir().unwrap();
     let b = root.path().join("backups");
     fs::create_dir_all(&b).unwrap();
@@ -18,8 +19,10 @@ fn prune_disk_cap_removes_oldest_first() {
     fs::write(old.join("f.txt"), b"x").unwrap();
     fs::write(new.join("g.txt"), b"yy").unwrap();
 
-    yolt::retention::prune(&b, Duration::from_secs(365 * 24 * 3600), 2, None).unwrap();
+    set_file_mtime(&old, FileTime::from_unix_time(0, 0)).unwrap();
 
-    assert!(!old.exists(), "oldest run should be removed first");
+    yolt::retention::prune(&b, Duration::from_secs(3600), 0, None).unwrap();
+
+    assert!(!old.exists());
     assert!(new.exists());
 }

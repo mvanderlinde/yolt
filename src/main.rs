@@ -262,6 +262,9 @@ fn main() -> anyhow::Result<()> {
                     *g = None;
                 }
                 eprintln!("info: initial snapshot copied {n} bytes");
+                retention::set_base_snapshot_run(&backup_path, &run_id)?;
+            } else {
+                retention::remove_base_snapshot_markers(&backup_path)?;
             }
 
             let debounce = Duration::from_millis(cfg.debounce_ms.max(1));
