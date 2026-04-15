@@ -183,8 +183,8 @@ fn main() -> anyhow::Result<()> {
 
     match cli.command {
         Commands::Watch(args) => {
-            let cfg = merge_watch_config(&args)?;
-            config::validate(&cfg)?;
+            let mut cfg = merge_watch_config(&args)?;
+            config::validate(&mut cfg)?;
             let (project_id, project_backup_root) =
                 project::namespaced_backup_root(&cfg.backup_root, &cfg.watch)?;
 
@@ -333,8 +333,8 @@ fn main() -> anyhow::Result<()> {
             .map_err(|e| anyhow::anyhow!("{e}"))?;
         }
         Commands::Restore(args) => {
-            let cfg = merge_restore_config(&args)?;
-            config::validate(&cfg)?;
+            let mut cfg = merge_restore_config(&args)?;
+            config::validate(&mut cfg)?;
             let (_project_id, project_backup_root) =
                 project::namespaced_backup_root(&cfg.backup_root, &cfg.watch)?;
             let rel = restore::normalize_relative_to_watch(&cfg.watch, &args.path)?;

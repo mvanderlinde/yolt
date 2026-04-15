@@ -206,13 +206,17 @@ pub fn load_toml_file(path: &std::path::Path) -> Result<TomlConfig, ConfigError>
     Ok(toml::from_str(&s)?)
 }
 
-pub fn validate(cfg: &Config) -> Result<(), ConfigError> {
+/// Validates config and resolves `watch` to an absolute path (via [`std::fs::canonicalize`]).
+/// Required so filesystem events (absolute paths) match `watch` and the watcher does not drop
+/// events when the user passes `.` or other relative roots.
+pub fn validate(cfg: &mut Config) -> Result<(), ConfigError> {
     if cfg.watch.as_os_str().is_empty() {
         return Err(ConfigError::MissingWatch);
     }
     if !cfg.watch.is_dir() {
         return Err(ConfigError::NotADirectory(cfg.watch.clone()));
     }
+    cfg.watch = std::fs::canonicalize(&cfg.watch).map_err(ConfigError::Io)?;
     if cfg.retention.is_zero() {
         return Err(ConfigError::ZeroRetention);
     }
